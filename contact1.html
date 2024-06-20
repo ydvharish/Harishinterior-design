@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="contact1.html" class="nav-item nav-link"></a>
+
+    <div class="container">
+        <h2>Contact Us</h2>
+        <form id="contactForm">
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" required>
+            <label for="query">Your Query:</label>
+            <textarea id="query" name="query" rows="4" required></textarea>
+            <input type="submit" value="Submit">
+        </form>
+        <div class="message" id="message"></div>
+
+    </div>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init('OvlEjrX4TzlVCTAh4'); // Replace 'YOUR_USER_ID' with your actual User ID from EmailJS
+        })();
+    </script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var phone = document.getElementById('phone').value;
+            var query = document.getElementById('query').value;
+
+            var templateParams = {
+                phone: phone,
+                query: query
+            };
+
+            emailjs.send('service_x3oz9ll', 'template_v2aaesq', templateParams) // Replace with your actual Service ID and Template ID
+                .then(function(response) {
+                    document.getElementById('message').innerText = 'Your query has been sent successfully!';
+                }, function(error) {
+                    document.getElementById('message').innerText = 'Sorry, there was an error sending your query. Please try again later.';
+                });
+        });
+    </script>
+</body>
+</html>
